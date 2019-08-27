@@ -1,9 +1,7 @@
 <?php
   $menu = Router::getMenu('menu_acl');
   $currentPage = currentPage();
-
 ?>
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -33,11 +31,6 @@
                   <?php else: ?>
                     <li><a class="<?=$active?>" href="<?=$v?>"><?= $k ?></a></li>
                   <?php endif; ?>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
                 <?php endforeach; ?>
               </ul>
             </li>

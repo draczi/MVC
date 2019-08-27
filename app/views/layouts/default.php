@@ -8,15 +8,14 @@
     <title><?=$this->siteTitle();?></title>
     <link rel="stylesheet" href="<?=PROOT?>css/bootstrap.min.css" media="screen" title="no title" charset="utf-8" />
     <link rel="stylesheet" href="<?=PROOT?>css/custom.css" media="screen" title="no title" charset="utf-8" />
-    <script scr="<?=PROOT?>js/jQuery-2.2.4.min.js"></script>
-    <script scr="<?=PROOT?>js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <?= $this->content('head'); ?>
 
   </head>
   <body>
     <?php include 'main_menu.php' ?>
-
     <?=$this->content('body'); ?>
 
   </body>
