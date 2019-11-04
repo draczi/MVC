@@ -1,4 +1,10 @@
 <?php
+  namespace App\Controllers;
+  use Core\Controller;
+  use Core\Session;
+  use Core\Router;
+  use App\Models\Contacts;
+  use App\Models\Users;
 
   class ContactsController extends Controller {
 

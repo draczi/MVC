@@ -1,4 +1,8 @@
 <?php
+  namespace App\Models;
+  use Core\Model;
+  use Core\Validators\RequiredValidator;
+  use Core\Validators\MaxValidator;
 
   class Contacts extends Model {
 
@@ -10,19 +14,6 @@
       parent::__construct($table);
       $this->_softDelete = false;
     }
-
-    public static $addValidation = [
-      'fname' => [
-        'display' => 'First Name',
-        'required' => true,
-        'max' => 155
-      ],
-      'lname' => [
-        'display' => 'Last Name',
-        'required' => true,
-        'max' => 155
-        ]
-    ];
 
     public function validator() {
       $this->runValidation(new RequiredValidator($this, ['field' => 'lname', 'msg'=>'Last Name is required']));

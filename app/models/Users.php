@@ -1,4 +1,16 @@
 <?php
+  namespace App\Models;
+  use Core\Model;
+  use App\Models\Users;
+  use App\Models\UserSession;
+  use Core\Cookie;
+  use Core\Session;
+  use Core\Validators\MinValidator;
+  use Core\Validators\MaxValidator;
+  use Core\Validators\RequiredValidator;
+  use Core\Validators\MatchesValidator;
+  use Core\Validators\EmailValidator;
+  use Core\Validators\UniqueValidator;
 
   class Users extends Model {
 
@@ -14,9 +26,9 @@
       $this->_softDelete = true;
       if($user != '') {
         if(is_int($user)) {
-          $u = $this->_db->findFirst('users', ['conditions' => 'id = ?', 'bind'=>[$user]], 'Users');
+          $u = $this->_db->findFirst('users', ['conditions' => 'id = ?', 'bind'=>[$user]], 'App\Models\Users');
         } else {
-          $u = $this->_db->findFirst('users', ['conditions' => 'username = ?', 'bind'=>[$user]], 'Users');
+          $u = $this->_db->findFirst('users', ['conditions' => 'username = ?', 'bind'=>[$user]], 'App\Models\Users');
         }
         if($u) {
           foreach($u as $key => $val) {
@@ -35,13 +47,17 @@
       $this->runValidation(new MinValidator($this, ['field'=>'username', 'rule'=>6, 'msg'=>'Username must be at least 6 characters.']));
       $this->runValidation(new MaxValidator($this, ['field'=>'username', 'rule'=>150, 'msg'=>'Username must be less than 150 characters.']));
       $this->runValidation(new UniqueValidator($this, ['field'=>'username', 'msg'=>'That username already exists. Please choose a new one.']));
-      $this->runValidation(new MatchesValidator($this, ['field'=>'password', 'rule' => $this->_confirm, 'msg'=>'Passwords not matches.']));
+      if($this->isNew()) {
+        $this->runValidation(new MatchesValidator($this, ['field'=>'password', 'rule' => $this->_confirm, 'msg'=>'Passwords not matches.']));
+      }
       $this->runValidation(new RequiredValidator($this, ['field' => 'password', 'msg' => 'Password is required.']));
       $this->runValidation(new MinValidator($this, ['field'=>'password', 'rule'=>6, 'msg'=> 'Password must be at least 6 characters.']));
     }
 
     public function beforeSave(){
-      $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+      if($this->isNew()) {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+      }
     }
 
     public function findByUsername($username) {

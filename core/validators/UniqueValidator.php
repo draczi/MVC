@@ -1,4 +1,6 @@
 <?php
+  namespace Core\Validators;
+  use Core\Validators\CustomValidator;
 
   class UniqueValidator extends CustomValidator {
 
@@ -11,7 +13,7 @@
 
       //check updating record
       if(!empty($this->_model->id)) {
-        $conditions[] = "id = ?";
+        $conditions[] = "id != ?";
         $bind[] = $this->_model->id;
       }
 

@@ -1,4 +1,6 @@
 <?php
+  namespace Core;
+  use Core\Session;
 
   class FH {
     public static function inputBlock($type, $label, $name, $value='', $inputAttrs=[], $divAttrs=[]) {
