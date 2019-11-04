@@ -16,7 +16,9 @@
   </head>
   <body>
     <?php include 'main_menu.php' ?>
-    <?=$this->content('body'); ?>
-
+    <div class="container-fluid" type="min-height: cal(100% - 125px);">
+      <?= Session::displayMsg() ?>
+      <?=$this->content('body'); ?>
+    </div>
   </body>
 </html>

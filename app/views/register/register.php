@@ -4,34 +4,15 @@
 <div class="col-md-6 col-md-offset-3 well">
   <h3 class="text-center">Regisztráció</h3>
     <form action="" class="form" method="post">
-        <div class="bg-danger"><?= $this->displayErrors ?></div>
-        <div class="form-group">
-          <label for="lname">Vezetéknév:</label>
-          <input type="text" id="lname" name="lname" class="form-control" value="<?= $this->post['lname']?>">
-        </div>
-        <div class="form-group">
-          <label for="fname">Keresztnév:</label>
-          <input type="text" id="fname" name="fname" class="form-control" value="<?= $this->post['fname']?>">
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" class="form-control" value="<?= $this->post['email']?>">
-        </div>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" class="form-control" value="<?= $this->post['username']?>">
-        </div>
-        <div class="form-group">
-          <label for="password">Jelszó:</label>
-          <input type="password" id="password" name="password" class="form-control" value="<?= $this->post['password']?>">
-        </div>
-        <div class="form-group">
-          <label for="confirm">Jelszó ismét:</label>
-          <input type="password" id="confirm" name="confirm" class="form-control" value="<?= $this->post['confirm']?>">
-        </div>
-        <div class="pull-right">
-          <input type="submit" class="btn btn-primary btn-large" value="Register">
-        </div>
+      <?=FH::csrfInput() ?>
+      <?= FH::displayErrors($this->displayErrors)?>
+      <?= FH::inputBlock('text','First Name', 'fname', $this->newUser->fname, ['class' => 'form-control input-sm'], ['class' => 'form-group']) ?>
+      <?= FH::inputBlock('text','Last Name', 'lname', $this->newUser->lname, ['class' => 'form-control input-sm'], ['class' => 'form-group']); ?>
+      <?= FH::inputBlock('text','Email', 'email', $this->newUser->email, ['class' => 'form-control input-sm'], ['class' => 'form-group']); ?>
+      <?= FH::inputBlock('text','Username', 'username', $this->newUser->username, ['class' => 'form-control input-sm'], ['class' => 'form-group']); ?>
+      <?= FH::inputBlock('password','Password', 'password', $this->newUser->password, ['class' => 'form-control input-sm'], ['class' => 'form-group']); ?>
+      <?= FH::inputBlock('password','Confirm Password', 'confirm', $this->newUser->getConfirm(), ['class' => 'form-control input-sm'], ['class' => 'form-group']); ?>
+      <?= FH::submitBlock('Register', ['class' => 'btn btn-primary btn-large'], ['class' => 'text-right'])?>
     </form>
 </div>
 <?php $this->end(); ?>

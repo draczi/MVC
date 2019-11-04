@@ -2,7 +2,8 @@
 
   class Contacts extends Model {
 
-    public $deleted = 0;
+    public $id, $user_id, $fname, $lname, $email, $address, $address2, $city, $state, $zip;
+    public $home_phone, $cell_phone, $work_phone, $deleted = 0;
 
     public function __construct() {
       $table = 'contacts';
@@ -22,6 +23,13 @@
         'max' => 155
         ]
     ];
+
+    public function validator() {
+      $this->runValidation(new RequiredValidator($this, ['field' => 'lname', 'msg'=>'Last Name is required']));
+      $this->runValidation(new RequiredValidator($this, ['field' => 'fname', 'msg'=>'First Name is required']));
+      $this->runValidation(new MaxValidator($this,['field' => 'fname', 'msg' => 'First Name must be less than 155 characters.','rule' => 155]));
+      $this->runValidation(new MaxValidator($this,['field' => 'lname', 'msg' => 'Last Name must be less than 155 characters.','rule' => 155]));
+    }
     public function findAllByUserId($user_id, $params=[]) {
       $conditions = [
         'conditions' => 'user_id = ?',
