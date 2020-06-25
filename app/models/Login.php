@@ -4,7 +4,7 @@
   use Core\Validators\RequiredValidator;
 
   class Login extends Model {
-    public $username, $password, $remember_me;
+    public $username, $password, $remember_me, $belepes_at;
 
     public function __construct(){
       parent::__construct('tmp_fake');

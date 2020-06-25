@@ -5,6 +5,7 @@
   use Core\Router;
   use App\Models\Contacts;
   use App\Models\Users;
+  use Core\H;
 
   class ContactsController extends Controller {
 
@@ -62,7 +63,7 @@
     }
 
     public function deleteAction($id) {
-      $contact = $this->ContactsModel->findByIdAndUserId((int)$id, Users::currentUser()->id); print_r($contact) ;
+      $contact = $this->ContactsModel->findByIdAndUserId((int)$id, Users::currentUser()->id);
       if($contact) {
         $contact->delete($contact->id);
         Session::addMsg('success', 'Contact has been deleted.');
